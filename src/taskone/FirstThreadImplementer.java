@@ -1,18 +1,18 @@
-package Task_1;
+package taskone;
 
 public class FirstThreadImplementer implements Runnable {
 
     ThreadPrinter printer;
-    private String color;
+    private String messageColor;
 
-    FirstThreadImplementer(ThreadPrinter printer, String color) {
+    public FirstThreadImplementer(ThreadPrinter printer, String messageColor) {
         this.printer = printer;
-        this.color = color;
+        this.messageColor = messageColor;
     }
 
     public void run() {
-        for (int i = 0; i < ThreadLauncher.TREAD_COUNTER; i++) {
-            printer.FirstMessageOutput(color);
+        for (int i = 0; i < Main.TREAD_COUNTER; i++) {
+            printer.firstMessageOutput(messageColor);
         }
     }
 
