@@ -15,6 +15,7 @@ public class Main {
     public static final String VIOLET = "\033[0;35m";
     public static final String RESET = "\033[0m";
     public static final int CAPACITY = 200;
+    public static final int NUMBER_OF_DIGITS = 10000;
 
     public static void main(String[] args) {
 

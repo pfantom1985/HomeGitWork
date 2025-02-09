@@ -12,9 +12,7 @@ public class Producer implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 1; i <= 3334; i++) {
-            queue.putElement(i, color);
-        }
+        queue.putElement(color);
     }
 
 }

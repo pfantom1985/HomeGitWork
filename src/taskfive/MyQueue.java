@@ -7,6 +7,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class MyQueue {
 
+    private int tempPutCounter = Main.NUMBER_OF_DIGITS;
+    private int tempGetCounter = 0;
     private ReentrantLock locker;
     private Condition condition;
 
@@ -18,37 +20,43 @@ public class MyQueue {
         condition = locker.newCondition();
     }
 
-    public void getElement(int i, String color) {
-        locker.lock();
-        try {
-            while (digitalQueue.isEmpty()) {
-                condition.await();
+    public void getElement(String color) {
+        while (tempGetCounter < Main.NUMBER_OF_DIGITS) {
+            locker.lock();
+            try {
+                while (digitalQueue.isEmpty()) {
+                    condition.await();
+                }
+                System.out.println(color + "Consumer ( " + Thread.currentThread().getName() + " ) get one of ( " + tempGetCounter + " ) numbers: " + digitalQueue.pollLast() + "." + Main.RESET);
+                System.out.println(color + "Numbers in queue: " + digitalQueue.size() + "." + Main.RESET);
+                tempGetCounter++;
+                condition.signalAll();
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                locker.unlock();
             }
-            System.out.println(color + "Потребитель < " + Thread.currentThread().getName() + " > взял одно из ( " + i + " ) число: " + digitalQueue.pollLast() + "." + Main.RESET);
-            System.out.println(color + "Чисел в очереди: " + digitalQueue.size() + "." + Main.RESET);
-            condition.signalAll();
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            locker.unlock();
         }
     }
 
-    public void putElement(int i, String color) {
-        locker.lock();
-        try {
-            while (digitalQueue.size() > 80) {
-                condition.await();
+    public void putElement(String color) {
+        while (tempPutCounter > 1) {
+            locker.lock();
+            try {
+                while (digitalQueue.size() > 80) {
+                    condition.await();
+                }
+                int randomNumber = random.nextInt(99) + 1;
+                digitalQueue.addLast(randomNumber);
+                System.out.println(color + "Producer < " + Thread.currentThread().getName() + " > put one of < " + tempPutCounter + " > numbers: " + randomNumber + "." + Main.RESET);
+                System.out.println(color + "Numbers in queue: " + digitalQueue.size() + "." + Main.RESET);
+                tempPutCounter--;
+                condition.signalAll();
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            } finally {
+                locker.unlock();
             }
-            int randomNumber = random.nextInt(99) + 1;
-            digitalQueue.addLast(randomNumber);
-            System.out.println(color + "Производитель < " + Thread.currentThread().getName() + " > внес одно из < " + i + " > число: " + randomNumber + "." + Main.RESET);
-            System.out.println(color + "Чисел в очереди: " + digitalQueue.size() + "." + Main.RESET);
-            condition.signalAll();
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            locker.unlock();
         }
     }
 
