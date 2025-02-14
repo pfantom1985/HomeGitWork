@@ -27,7 +27,7 @@ public class MyQueue {
                 while (digitalQueue.isEmpty()) {
                     condition.await();
                 }
-                System.out.println(color + "Consumer ( " + Thread.currentThread().getName() + " ) get one of ( " + tempGetCounter + " ) numbers: " + digitalQueue.pollLast() + "." + Main.RESET);
+                System.out.println(color + Thread.currentThread().getName() + " get one of ( " + tempGetCounter + " ) numbers: " + digitalQueue.pollLast() + "." + Main.RESET);
                 System.out.println(color + "Numbers in queue: " + digitalQueue.size() + "." + Main.RESET);
                 tempGetCounter++;
                 condition.signalAll();
@@ -48,7 +48,7 @@ public class MyQueue {
                 }
                 int randomNumber = random.nextInt(99) + 1;
                 digitalQueue.addLast(randomNumber);
-                System.out.println(color + "Producer < " + Thread.currentThread().getName() + " > put one of < " + tempPutCounter + " > numbers: " + randomNumber + "." + Main.RESET);
+                System.out.println(color + Thread.currentThread().getName() + " put one of < " + tempPutCounter + " > numbers: " + randomNumber + "." + Main.RESET);
                 System.out.println(color + "Numbers in queue: " + digitalQueue.size() + "." + Main.RESET);
                 tempPutCounter--;
                 condition.signalAll();
