@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class LoggerSingleton {
 
-    private static LoggerSingleton instance;
+    private static volatile LoggerSingleton instance;
     public String informationalText;
 
     LocalDateTime dateTime = LocalDateTime.now();
@@ -19,9 +19,13 @@ public class LoggerSingleton {
         this.informationalText = informationalText;
     }
 
-    public static synchronized LoggerSingleton getInstance(String informationalText) {
+    public static LoggerSingleton getInstance(String informationalText) {
         if (instance == null) {
-            instance = new LoggerSingleton(informationalText);
+            synchronized (LoggerSingleton.class) {
+                if (instance == null) {
+                    instance = new LoggerSingleton(informationalText);
+                }
+            }
         }
         return instance;
     }
@@ -29,7 +33,7 @@ public class LoggerSingleton {
     public void fileWriter(String informationalText) {
         try (FileOutputStream fos = new FileOutputStream("/Users/aleksey/GITwork/HomeGitWork/src/tasksixth/myLogFile.txt", true);
              PrintStream printStream = new PrintStream(fos)) {
-            String logText = informationalText + " < " + dateTime + " >; ";
+            String logText = "Recorded: < " + informationalText + " > at ( " + dateTime + " ) o'clock; ";
             byte[] message_toBytes = logText.getBytes();
             printStream.write(message_toBytes);
             System.out.println(" is written to the file < " + "myLogFile.txt" + " >.");
