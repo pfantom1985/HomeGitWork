@@ -18,6 +18,6 @@ public class SingletonClass {
         System.out.println("Second try - " + dateTwo);
         SingletonMy singletonTwo = SingletonMy.getLocalDate(dateTwo);
         System.out.println("If you see different values, then 2 singletons were created ( " + singletonTwo.value + " ).");
-        
+
     }
 }
