@@ -34,8 +34,8 @@ public class LoggerSingleton {
         try (FileOutputStream fos = new FileOutputStream("/Users/aleksey/GITwork/HomeGitWork/src/tasksixth/myLogFile.txt", true);
              PrintStream printStream = new PrintStream(fos)) {
             String logText = "Recorded: < " + informationalText + " > at ( " + dateTime + " ) o'clock; ";
-            byte[] message_toBytes = logText.getBytes();
-            printStream.write(message_toBytes);
+            byte[] messageToBytes = logText.getBytes();
+            printStream.write(messageToBytes);
             System.out.println(" is written to the file < " + "myLogFile.txt" + " >.");
         } catch (IOException e) {
             e.getMessage();
