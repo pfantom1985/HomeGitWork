@@ -27,7 +27,7 @@ public class LoggerSingleton {
     }
 
     public void fileWriter(String informationalText) {
-        try (FileOutputStream fos = new FileOutputStream("/Users/aleksey/IPsNew/HomeProject/src/task68_70/myLogFile.txt", true);
+        try (FileOutputStream fos = new FileOutputStream("/Users/aleksey/GITwork/HomeGitWork/src/tasksixth/myLogFile.txt", true);
              PrintStream printStream = new PrintStream(fos)) {
             String logText = informationalText + " < " + dateTime + " >; ";
             byte[] message_toBytes = logText.getBytes();
