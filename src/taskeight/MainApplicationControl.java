@@ -7,24 +7,24 @@ package taskeight;
 
 import java.util.Scanner;
 
-class MainPerson {
+class MainApplicationControl {
 
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter name: ");
-        String nameScanner = scanner.nextLine();
-        System.out.println("You entered the name: " + nameScanner);
+        String userEnteredName = scanner.nextLine();
+        System.out.println("You entered the name: " + userEnteredName);
 
         System.out.print("Enter surname: ");
-        String surnameScanner = scanner.nextLine();
-        System.out.println("You entered the surname: " + surnameScanner);
+        String userEnteredSurname = scanner.nextLine();
+        System.out.println("You entered the surname: " + userEnteredSurname);
 
         System.out.print("Enter bithday: ");
-        String bithdayScanner = scanner.nextLine();
-        System.out.println("You entered the bithday: " + bithdayScanner);
+        String userEnteredBithday = scanner.nextLine();
+        System.out.println("You entered the bithday: " + userEnteredBithday);
 
-        Person person = new Person.PersonBuilder(nameScanner, surnameScanner).getBirthday(bithdayScanner).build();
+        PersonService person = PersonService.builder().name(userEnteredName).surname(userEnteredSurname).birthday(userEnteredBithday).build();
         System.out.println("\nResult of builder using: " + person.getName() + " " + person.getSurname() + " " + person.getBirthday());
 
     }

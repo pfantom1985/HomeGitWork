@@ -1,12 +1,12 @@
 package taskeight;
 
-public class Person {
+public class PersonService {
 
-    private String name;
-    private String surname;
-    private String birthday;
+    private final String name;
+    private final String surname;
+    private final String birthday;
 
-    public Person(PersonBuilder personBuilder) {
+    public PersonService(PersonBuilder personBuilder) {
         name = personBuilder.name;
         surname = personBuilder.surname;
         birthday = personBuilder.birthday;
@@ -24,24 +24,33 @@ public class Person {
         return birthday;
     }
 
+    public static PersonBuilder builder() {
+        return new PersonBuilder();
+    }
+
     public static class PersonBuilder {
 
         private String name;
         private String surname;
         private String birthday;
 
-        public PersonBuilder(String name, String surname) {
+        public PersonBuilder name(String name) {
             this.name = name;
-            this.surname = surname;
+            return this;
         }
 
-        public PersonBuilder getBirthday(String birthday) {
+        public PersonBuilder surname(String surname) {
+            this.surname = surname;
+            return this;
+        }
+
+        public PersonBuilder birthday(String birthday) {
             this.birthday = birthday;
             return this;
         }
 
-        public Person build() {
-            return new Person(this);
+        public PersonService build() {
+            return new PersonService(this);
         }
     }
 
