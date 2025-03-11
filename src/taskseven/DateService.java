@@ -2,29 +2,34 @@ package taskseven;
 
 /* Задание 68. Часть 2. */
 
-public final class SingletonMy {
+import java.time.LocalDateTime;
 
-    private static volatile SingletonMy LOCAL_DATE_SINGLETON;
-    public String value;
+public final class DateService {
 
-    private SingletonMy(String value) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        this.value = value;
+    private static DateService INSTANCE;
+    //public String value;
+
+    private DateService() {
     }
 
-    public static SingletonMy getLocalDate(String value) {
-        if (LOCAL_DATE_SINGLETON == null) {
-            synchronized (SingletonMy.class) {
-                if (LOCAL_DATE_SINGLETON == null) {
-                    LOCAL_DATE_SINGLETON = new SingletonMy(value);
-                }
-            }
+    //private DateService(String value) {
+        //try {
+        //    Thread.sleep(1000);
+        //} catch (InterruptedException ex) {
+        //    ex.printStackTrace();
+        //}
+    //    this.value = value;
+    //}
+
+    public static DateService getLocalDate() {
+        if (INSTANCE == null) {
+            INSTANCE = new DateService();
         }
-        return LOCAL_DATE_SINGLETON;
+        return INSTANCE;
+    }
+
+    public static void getDateTime() {
+        System.out.println(LocalDateTime.now());
     }
 
 }

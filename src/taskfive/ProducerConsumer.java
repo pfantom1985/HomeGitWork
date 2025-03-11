@@ -7,8 +7,8 @@ package taskfive;
             элементов не станет 10000, только потом программа завершается.
 */
 
-import java.util.concurrent.*;
 import java.util.Random;
+import java.util.concurrent.*;
 
 public class ProducerConsumer {
 
@@ -41,7 +41,7 @@ public class ProducerConsumer {
     static class Producer implements Runnable {
 
         private int id;
-        public String color;
+        private String color;
 
         public Producer(int id, String color) {
             this.id = id;

@@ -1,18 +1,40 @@
-package taskfive;
+//ackage taskfive;
 
-public class Producer implements Runnable {
+//mport java.util.ArrayDeque;
+//mport java.util.Random;
 
-    private MyQueue queue;
-    private String color;
+//ublic class Producer implements Runnable {
 
-    public Producer(MyQueue queue, String color) {
-        this.queue = queue;
-        this.color = color;
-    }
+//   private ArrayDeque<Integer> digitalQueue;
+//   private String color;
+//   private int tempCounter = Main.NUMBER_OF_DIGITS;
 
-    @Override
-    public void run() {
-        queue.putElement(color);
-    }
+//   public Producer(ArrayDeque<Integer> digitalQueue, String color) {
+//       this.digitalQueue = digitalQueue;
+//       this.color = color;
+//   }
 
-}
+//   @Override
+//   public void run() {
+//       Random random = new Random();
+//       try {
+//           while (Main.digits_counter < tempCounter) {
+//               int randomNumber = random.nextInt(100) + 1;
+//               digitalQueue.addLast(randomNumber);
+//               System.out.println(color + Thread.currentThread().getName() + " put one of < " + tempCounter + " > numbers: " + randomNumber + "." + Main.RESET);
+//               synchronized (digitalQueue) {
+//                   tempCounter--;
+//                   while (digitalQueue.size() >= Main.MAX_QUEUE_SIZE) {
+//                       digitalQueue.wait();
+//                   }
+//                   if (digitalQueue.size() <= Main.MIN_QUEUE_SIZE) {
+//                       digitalQueue.notifyAll();
+//                   }
+//               }
+//           }
+//       } catch (InterruptedException e) {
+//           Thread.currentThread().interrupt();
+//       }
+//   }
+//
+//queue.putElement(color);
